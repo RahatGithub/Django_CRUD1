@@ -13,5 +13,39 @@
                 <input type="submit" class="btn btn-primary col-md-3" value="Add">
             </form>
         </div>
+        <div class="col-md-8">
+            <h4 class="text-center alert alert-info">Student Information</h4>
+            {% if student %}
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col text-primary">ID</th>
+                        <th scope="col text-primary">First Name</th>
+                        <th scope="col text-primary">Last Name</th>
+                        <th scope="col text-primary">Email</th>
+                        <th scope="col text-primary">Phone</th>
+                        <th scope="col text-primary">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for st in student %}
+                            <tr>
+                                <th scope="row">{{st.id}}</th>
+                                <td>{{st.first_name}}</td>
+                                <td>{{st.last_name}}</td>
+                                <td>{{st.email}}</td>
+                                <td>{{st.phone}}</td>
+                                <td>
+                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-sm">Remove</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %} 
+                <h6 class="text-center alert alert-danger">No records</h6>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
