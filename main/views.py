@@ -15,14 +15,18 @@ def student_form(request):
             l_name = fm.cleaned_data['last_name']
             email = fm.cleaned_data['email']
             phone = fm.cleaned_data['phone']
-            entity = Student(first_name=f_name, last_name=l_name, email=email, phone=phone)
-            entity.save() 
+            record = Student(first_name=f_name, last_name=l_name, email=email, phone=phone)
+            record.save() 
             fm = StudentRegistration()
     else:
         fm = StudentRegistration()
 
     student = Student.objects.all()
-    
-    print(len(student))
-    
     return render(request, 'main/student_form.html', {'form':fm, 'student':student})
+
+
+def delete_data(request, id):
+    if request.method == 'POST':
+        record = Student.objects.get(pk=id) 
+        record.delete()
+        return redirect('/main/student_form')

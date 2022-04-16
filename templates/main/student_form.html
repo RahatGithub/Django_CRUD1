@@ -19,12 +19,12 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col text-primary">ID</th>
-                        <th scope="col text-primary">First Name</th>
-                        <th scope="col text-primary">Last Name</th>
-                        <th scope="col text-primary">Email</th>
-                        <th scope="col text-primary">Phone</th>
-                        <th scope="col text-primary">Action</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +37,9 @@
                                 <td>{{st.phone}}</td>
                                 <td>
                                     <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm">Remove</a>
+                                    <form action="{% url 'delete_data' st.id %}" method="POST" class="d-inline"> {% csrf_token %}
+                                        <input type="submit" class="btn btn-danger btn-sm" value="Remove">
+                                    </form>
                                 </td>
                             </tr>
                         {% endfor %}
