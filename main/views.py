@@ -21,8 +21,20 @@ def student_form(request):
     else:
         fm = StudentRegistration()
 
-    student = Student.objects.all()
-    return render(request, 'main/student_form.html', {'form':fm, 'student':student})
+    students = Student.objects.all()
+    return render(request, 'main/student_form.html', {'form':fm, 'students':students})
+
+
+def update_data(request, id):
+    if request.method== 'POST':
+        record = Student.objects.get(pk=id)
+        fm = StudentRegistration(request.POST, instance=record) # Generating a form with the values of the record with the given id
+        if fm.is_valid():
+            fm.save()
+    else:
+        record = Student.objects.get(pk=id)
+        fm = StudentRegistration(instance=record) 
+    return render(request, 'main/update_data.html', {'form':fm})
 
 
 def delete_data(request, id):
